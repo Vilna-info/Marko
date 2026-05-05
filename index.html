@@ -170,7 +170,6 @@
         function createCard(file, container, path) {
             const card = document.createElement('div');
             
-            // Стилізація залежно від розділу
             if (path === 'painting') {
                 card.className = "bg-surface-container-low p-5 rounded-2xl border border-white/5 group hover:border-tertiary/40 transition-all";
                 card.innerHTML = `
@@ -178,28 +177,44 @@
                         <img src="${file.download_url}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
                     </div>
                     <h3 class="font-headline font-bold text-lg truncate">${file.name}</h3>
-                    <p class="text-[10px] font-label text-neutral-500 mt-2 uppercase tracking-wide">Digital Art | Високоякісне зображення (PNG), розроблене для проекту.</p>
+                    <p class="text-[10px] font-label text-neutral-500 mt-2 uppercase tracking-wide">Digital Art | PNG зображення високої якості.</p>
                 `;
             } else if (path === '3D') {
+                // Логіка заміни розширення для прев'ю
+                const fileNameNoExt = file.name.substring(0, file.name.lastIndexOf('.'));
+                const previewUrl = `3D/${fileNameNoExt}.png`; // Шлях до картинки з такою ж назвою
+        
                 card.className = "bg-surface-container-low p-6 rounded-2xl border border-white/5 group hover:border-primary/40 transition-all";
                 card.innerHTML = `
-                    <div class="aspect-square bg-neutral-900 rounded-xl flex flex-col items-center justify-center mb-6 border border-white/5 group-hover:bg-primary/5 transition-all">
-                        <span class="material-symbols-outlined text-6xl text-primary/30 group-hover:text-primary group-hover:rotate-12 transition-all">deployed_code</span>
-                        <span class="mt-4 text-[8px] font-mono text-neutral-700 uppercase tracking-widest">${file.name.split('.').pop()}</span>
+                    <div class="aspect-square bg-neutral-900 rounded-xl overflow-hidden mb-6 border border-white/5 relative">
+                        <!-- Спроба завантажити PNG прев'ю, якщо його немає - покажеться фоновий колір -->
+                        <img src="${previewUrl}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        
+                        <!-- Запасний варіант (іконка), якщо PNG файл не знайдено[cite: 1, 2] -->
+                        <div style="display:none" class="absolute inset-0 flex flex-col items-center justify-center bg-neutral-900">
+                            <span class="material-symbols-outlined text-6xl text-primary/30">deployed_code</span>
+                            <span class="mt-2 text-[8px] font-mono text-neutral-600 uppercase">No Preview Found</span>
+                        </div>
+                        
+                        <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[8px] font-bold text-primary uppercase">
+                            ${file.name.split('.').pop()}
+                        </div>
                     </div>
                     <h3 class="font-headline font-bold text-lg truncate uppercase italic">${file.name}</h3>
-                    <p class="text-[10px] font-label text-neutral-500 mt-3 leading-relaxed">3D Model | Складна геометрична структура, оптимізована для візуалізації або 3D-друку.</p>
+                    <p class="text-[10px] font-label text-neutral-500 mt-3 leading-relaxed">3D Model | Оптимізована геометрична структура для візуалізації.</p>
                     <a href="${file.download_url}" class="mt-6 inline-block w-full py-3 bg-white/5 text-center text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all">Download_Src</a>
                 `;
             } else { // roblox_studio
                 card.className = "flex flex-col md:flex-row items-center gap-8 bg-surface-container-low p-8 rounded-2xl border border-white/5 hover:border-secondary/40 transition-all";
                 card.innerHTML = `
-                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center shadow-inner">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
                         <span class="material-symbols-outlined text-3xl text-secondary">terminal</span>
                     </div>
                     <div class="flex-1 text-center md:text-left">
                         <h3 class="text-xl font-headline font-bold italic tracking-tight uppercase">${file.name}</h3>
-                        <p class="text-[10px] font-label text-neutral-500 mt-1 uppercase tracking-widest">Roblox Level Logic | Середовище з налаштованою фізикою та скриптами.</p>
+                        <p class="text-[10px] font-label text-neutral-500 mt-1 uppercase tracking-widest">Roblox Level Logic | Скрипти та фізика.</p>
                     </div>
                     <a href="${file.download_url}" class="px-10 py-3 border border-secondary/30 text-secondary hover:bg-secondary hover:text-black font-label text-[10px] font-bold uppercase tracking-widest transition-all">Access_Data</a>
                 `;
