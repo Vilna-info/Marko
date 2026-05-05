@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>THE NEON CURATOR | GitHub Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5fb4ff",
+                        "secondary": "#fed400",
+                        "tertiary": "#ff716b",
+                        "surface": "#0e0e0e",
+                        "surface-container-low": "#131313",
+                        "surface-container-high": "#201f1f",
+                        "on-surface-variant": "#adaaaa",
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .scanline {
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .content-view { display: none; }
+        .content-view.active { display: block; }
+        .glass { background: rgba(14, 14, 14, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-black text-white font-body selection:bg-primary selection:text-black">
+    <div class="fixed inset-0 z-[100] opacity-[0.03] scanline pointer-events-none"></div>
 
+    <!-- Sidebar Navigation[cite: 1, 4] -->
+    <aside class="h-full w-64 fixed left-0 top-0 z-40 bg-black flex flex-col py-6 border-r border-white/5">
+        <div class="px-8 mb-10">
+            <h1 class="text-sky-400 font-black font-headline text-xl italic tracking-tighter">NEON CURATOR</h1>
+            <p class="font-label text-[8px] text-neutral-600 uppercase tracking-[0.3em] mt-1">OS V2.4 // GITHUB_DEPLOY</p>
+        </div>
+        
+        <nav class="flex-1 space-y-1">
+            <button onclick="switchView('3d')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-primary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">view_in_ar</span> 3D Models
+            </button>
+            <button onclick="switchView('paintings')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-tertiary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">palette</span> Paintings
+            </button>
+            <button onclick="switchView('roblox')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-secondary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">sports_esports</span> Roblox Studio
+            </button>
+        </nav>
+
+        <div class="px-6 mt-auto">
+            <!-- About Me Button -->
+            <button onclick="toggleAbout()" class="w-full py-4 bg-white/5 border border-white/10 text-white font-headline font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-primary hover:text-black transition-all mb-4">
+                Identity Profile
+            </button>
+            <div class="flex items-center gap-3 p-3 bg-neutral-900/40 rounded-lg">
+                <img src="image_f35cb6.png" class="w-8 h-8 rounded border border-primary/20" alt="Creator">
+                <div class="overflow-hidden">
+                    <p class="font-label text-[10px] truncate">SYST_NODE_01</p>
+                    <p class="font-label text-[8px] text-primary animate-pulse uppercase">Authorized</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="ml-64 p-12 min-h-screen">
+        
+        <!-- 3D Models View -->
+        <section id="view-3d" class="content-view active">
+            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">3D <span class="text-primary">Engine</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- Add items from your /3d folder here -->
+                <div class="bg-surface-container-low p-4 rounded-xl border border-white/5 group">
+                    <div class="aspect-square bg-neutral-900 rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                        <span class="material-symbols-outlined text-6xl text-white/10 group-hover:text-primary transition-all">deployed_code</span>
+                    </div>
+                    <p class="font-headline font-bold text-lg">Model_v01.obj</p>
+                    <p class="text-[10px] font-label text-neutral-500 uppercase tracking-widest">3D_FOLDER / OBJECT</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paintings View -->
+        <section id="view-paintings" class="content-view">
+            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">Visual <span class="text-tertiary">Canvas</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Add items from your /paintings folder here -->
+                <div class="bg-surface-container-low p-4 rounded-xl border border-white/5">
+                    <div class="aspect-video bg-neutral-800 rounded-lg overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq0f8d_8qL1nu7-1eEf2iWGTwPTi5CU37ztCbLSV3PGdSa32N9m7cUCr3NiOEpOZXaVZpk-MoWgiUlPz2n1yge5u2WbcZ2vXz46AiKDi_R5ptpRY7V304KJ6CpPV0B0tUny00b47O31r71K1uEkcVVBRIirxOyRyXieLP7JZb4VtW7XaAmBby8qhLgN3_Vj_reRuXjtlgncey33IgGWNxdB6Sfvlz2yY0THtP0bSBCBBUCsX1_tmu8cxzVCy9wrhONZMixHR23AP3-" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" alt="Painting">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roblox Studio View -->
+        <section id="view-roblox" class="content-view">
+            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">Game <span class="text-secondary">Hooks</span></h2>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Add items from your /roblox folder here -->
+                <div class="flex items-center gap-8 bg-surface-container-low p-8 rounded-xl border-l-4 border-secondary">
+                    <span class="material-symbols-outlined text-5xl text-secondary">terminal</span>
+                    <div>
+                        <h3 class="text-2xl font-headline font-bold uppercase">District_Hub_V2.rbxl</h3>
+                        <p class="text-on-surface-variant text-sm mt-1">Integrated physics engine with custom neon shaders[cite: 4].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Me Modal[cite: 1, 3] -->
+    <div id="about-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
+        <div class="relative w-full max-w-2xl bg-surface-container-low border border-primary/20 rounded-xl p-12 overflow-hidden">
+            <div class="scanline absolute inset-0 opacity-10"></div>
+            <button onclick="toggleAbout()" class="absolute top-8 right-8 text-neutral-500 hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <span class="font-label text-[10px] text-primary uppercase tracking-[0.4em] mb-4 block font-bold">Authorized Personnel Only</span>
+            <h2 class="text-4xl font-headline font-bold mb-6 tracking-tighter uppercase italic">Identity <span class="text-primary">Profile</span></h2>
+            <div class="space-y-6 text-on-surface-variant leading-relaxed">
+                <p>Establishing a new standard for high-energy digital environments[cite: 2]. This portfolio bridges the gap between digital editorial and the logic-driven worlds of Roblox and Scratch[cite: 2].</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-black/40 border border-white/5">
+                        <p class="font-label text-[8px] uppercase tracking-widest text-neutral-600 mb-1">Clearance</p>
+                        <p class="font-headline font-bold text-white uppercase">Level Alpha</p>
+                    </div>
+                    <div class="p-4 bg-black/40 border border-white/5">
+                        <p class="font-label text-[8px] uppercase tracking-widest text-neutral-600 mb-1">Specialization</p>
+                        <p class="font-headline font-bold text-white uppercase">OS Architecture</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchView(viewId) {
+            document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('view-' + viewId).classList.add('active');
+        }
+
+        function toggleAbout() {
+            const modal = document.getElementById('about-modal');
+            modal.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
