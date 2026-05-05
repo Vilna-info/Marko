@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>NEON CURATOR | Automated Hub</title>
+    <title>NEON CURATOR | Automated Portfolio</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -20,155 +20,204 @@
                         "surface-container-low": "#131313",
                         "on-surface-variant": "#adaaaa",
                     },
-                    fontFamily: { "headline": ["Space Grotesk"], "body": ["Manrope"], "label": ["Plus Jakarta Sans"] }
+                    fontFamily: { 
+                        "headline": ["Space Grotesk"], 
+                        "body": ["Manrope"], 
+                        "label": ["Plus Jakarta Sans"] 
+                    }
                 },
             },
         }
     </script>
     <style>
-        .scanline { background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%); background-size: 100% 4px; pointer-events: none; }
+        .scanline { 
+            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%); 
+            background-size: 100% 4px; 
+            pointer-events: none; 
+        }
         .content-view { display: none; }
         .content-view.active { display: block; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="bg-black text-white font-body selection:bg-primary selection:text-black">
+<body class="bg-black text-white font-body selection:bg-primary selection:text-black overflow-x-hidden">
     <div class="fixed inset-0 z-[100] opacity-[0.03] scanline pointer-events-none"></div>
 
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <aside class="h-full w-64 fixed left-0 top-0 z-40 bg-black flex flex-col py-6 border-r border-white/5">
         <div class="px-8 mb-10">
             <h1 class="text-sky-400 font-black font-headline text-xl italic tracking-tighter">NEON CURATOR</h1>
-            <p class="font-label text-[8px] text-neutral-600 uppercase tracking-[0.3em] mt-1">V2.5 // AUTO_SCAN_ACTIVE</p>
+            <p class="font-label text-[8px] text-neutral-600 uppercase tracking-[0.3em] mt-1">AUTO_SYNC_ENABLED</p>
         </div>
         
         <nav class="flex-1 space-y-1">
-            <button onclick="switchView('3d')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-primary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
-                <span class="material-symbols-outlined text-lg">view_in_ar</span> 3D Моделі
+            <button onclick="switchView('3d')" class="nav-btn w-full text-left px-8 py-4 text-neutral-400 hover:text-primary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">view_in_ar</span> 3D Об'єкти
             </button>
-            <button onclick="switchView('painting')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-tertiary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
-                <span class="material-symbols-outlined text-lg">palette</span> Живопис
+            <button onclick="switchView('painting')" class="nav-btn w-full text-left px-8 py-4 text-neutral-400 hover:text-tertiary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">palette</span> Галерея
             </button>
-            <button onclick="switchView('roblox')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-secondary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
-                <span class="material-symbols-outlined text-lg">sports_esports</span> Roblox Studio
+            <button onclick="switchView('roblox')" class="nav-btn w-full text-left px-8 py-4 text-neutral-400 hover:text-secondary hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
+                <span class="material-symbols-outlined text-lg">sports_esports</span> Roblox
             </button>
-            <button onclick="switchView('creator')" class="w-full text-left px-8 py-4 text-neutral-400 hover:text-white hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all">
-                <span class="material-symbols-outlined text-lg">person</span> Креатор
+            <button onclick="switchView('creator')" class="nav-btn w-full text-left px-8 py-4 text-neutral-400 hover:text-white hover:bg-white/5 flex items-center gap-4 font-label text-[10px] uppercase tracking-widest transition-all mt-4 border-t border-white/5 pt-8">
+                <span class="material-symbols-outlined text-lg">account_circle</span> Про Креатора
             </button>
         </nav>
 
         <div class="px-6 mt-auto">
-            <div class="flex items-center gap-3 p-3 bg-neutral-900/40 rounded-lg">
-                <img src="image_f35cb6.png" class="w-8 h-8 rounded border border-primary/20" alt="Admin">
+            <div class="flex items-center gap-3 p-4 glass-card rounded-xl border border-white/10">
+                <img src="image_f219ff.png" class="w-10 h-10 rounded shadow-lg shadow-primary/20 border border-primary/30" alt="Admin">
                 <div class="overflow-hidden">
-                    <p class="font-label text-[10px] truncate">Vilna-info</p>
-                    <p class="font-label text-[8px] text-primary uppercase">Node: Active</p>
+                    <p class="font-label text-[10px] truncate font-bold text-white uppercase">Vilna-info</p>
+                    <div class="flex items-center gap-1">
+                        <span class="w-1 h-1 bg-primary rounded-full animate-pulse"></span>
+                        <p class="font-label text-[8px] text-primary uppercase">Online</p>
+                    </div>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Main Content Viewport -->
     <main class="ml-64 p-12 min-h-screen">
         
         <!-- 3D Section -->
         <section id="view-3d" class="content-view active">
-            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">3D <span class="text-primary">Engine</span></h2>
+            <h2 class="text-5xl font-headline font-bold mb-10 uppercase italic tracking-tighter">3D <span class="text-primary">Models</span></h2>
             <div id="container-3d" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                <!-- Сюди завантажаться STL та FBX -->
+                <!-- Динамічний вміст папки 3D -->
             </div>
         </section>
 
         <!-- Painting Section -->
         <section id="view-painting" class="content-view">
-            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">Visual <span class="text-tertiary">Canvas</span></h2>
-            <div id="container-painting" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Сюди завантажаться PNG -->
+            <h2 class="text-5xl font-headline font-bold mb-10 uppercase italic tracking-tighter">Visual <span class="text-tertiary">Canvas</span></h2>
+            <div id="container-painting" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Динамічний вміст папки painting -->
             </div>
         </section>
 
         <!-- Roblox Section -->
         <section id="view-roblox" class="content-view">
-            <h2 class="text-5xl font-headline font-bold mb-8 uppercase italic tracking-tighter">Roblox <span class="text-secondary">Games</span></h2>
+            <h2 class="text-5xl font-headline font-bold mb-10 uppercase italic tracking-tighter">Game <span class="text-secondary">Deployments</span></h2>
             <div id="container-roblox" class="grid grid-cols-1 gap-6">
-                <!-- Сюди завантажаться .rbxl -->
+                <!-- Динамічний вміст папки roblox_studio -->
             </div>
         </section>
 
         <!-- Creator Section -->
         <section id="view-creator" class="content-view">
-            <div class="max-w-4xl bg-surface-container-low p-12 rounded-2xl border border-white/5 flex flex-col md:flex-row gap-12 items-center">
-                <img src="image_f35cb6.png" class="w-48 h-48 rounded-2xl grayscale hover:grayscale-0 transition-all border-2 border-primary/20 shadow-2xl shadow-primary/10" alt="Creator">
-                <div>
-                    <span class="font-label text-[10px] text-primary uppercase tracking-[0.4em] font-bold mb-4 block">System Architect</span>
-                    <h2 class="text-5xl font-headline font-bold mb-6 italic tracking-tighter">Vilna-<span class="text-primary">info</span></h2>
-                    <p class="text-on-surface-variant leading-relaxed text-lg">Розробник цифрових середовищ та спеціаліст з автоматизації. Створюю інтерактивні досвіди, поєднуючи веб-технології, 3D-моделювання та ігрову логіку в екосистемах Roblox та Scratch.</p>
+            <div class="max-w-5xl bg-surface-container-low p-12 rounded-3xl border border-white/5 flex flex-col lg:flex-row gap-16 items-center">
+                <div class="relative">
+                    <img src="image_f219ff.png" class="w-64 h-64 rounded-2xl object-cover grayscale hover:grayscale-0 transition-all duration-700 border-2 border-primary/20 shadow-2xl" alt="Creator">
+                    <div class="absolute -bottom-4 -right-4 bg-primary text-black px-4 py-2 font-black italic text-xs uppercase tracking-tighter">Verified_Node</div>
+                </div>
+                <div class="flex-1">
+                    <span class="font-label text-[10px] text-primary uppercase tracking-[0.5em] font-bold mb-6 block">Identity Protocol</span>
+                    <h2 class="text-6xl font-headline font-bold mb-8 italic tracking-tighter">Marko-<span class="text-primary text-shadow-glow">Lobashchuk
+                </span></h2>
+                    <p class="text-on-surface-variant leading-relaxed text-xl mb-8 font-light">
+                       Hello, i am Marko Lobashchuk. We with Pavlo created this site. I have a game in roblox.
+                     I also created models, paintings and roblox studio games or screenshoots. I will make more things that 
+                        i typed here. Im also a Youtuber. The first channel is Marko-Ender, The second is Creeper_killller.
+                        That's it, have a reat time at the site!
+                    </p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-black/40 p-4 border border-white/5 rounded-lg text-center">
+                            <p class="text-[8px] text-neutral-600 uppercase mb-1">Stack</p>
+                            <p class="text-[10px] font-bold uppercase">Full-Stack</p>
+                        </div>
+                        <div class="bg-black/40 p-4 border border-white/5 rounded-lg text-center">
+                            <p class="text-[8px] text-neutral-600 uppercase mb-1">Focus</p>
+                            <p class="text-[10px] font-bold uppercase">Roblox/3D</p>
+                        </div>
+                        <div class="bg-black/40 p-4 border border-white/5 rounded-lg text-center">
+                            <p class="text-[8px] text-neutral-600 uppercase mb-1">Status</p>
+                            <p class="text-[10px] font-bold uppercase text-primary">Available</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        const REPO_OWNER = 'Vilna-info'; // Ваш логін
-        const REPO_NAME = 'Vilna-info';  // Назва вашого репозиторію
+        const USERNAME = 'Vilna-info'; // Ваш логін GitHub
+        const REPO = 'Vilna-info';     // Назва репозиторію
 
-        async function fetchGithubFiles(path) {
-            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
-            return await response.json();
+        async function loadFiles(path, containerId, extensions) {
+            const container = document.getElementById(containerId);
+            try {
+                // Виклик GitHub API для отримання списку файлів у папці
+                const response = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${path}`);
+                if (!response.ok) return;
+                
+                const files = await response.json();
+
+                files.forEach(file => {
+                    const fileName = file.name.toLowerCase();
+                    if (extensions.some(ext => fileName.endsWith(ext))) {
+                        createCard(file, container, path);
+                    }
+                });
+            } catch (err) {
+                console.error(`Error loading ${path}:`, err);
+            }
         }
 
-        async function loadContent() {
-            // 3D Моделі
-            const files3d = await fetchGithubFiles('3D');
-            const container3d = document.getElementById('container-3d');
-            files3d.forEach(file => {
-                if (file.name.endsWith('.stl') || file.name.endsWith('.fbx')) {
-                    container3d.innerHTML += `
-                        <div class="bg-surface-container-low p-6 rounded-xl border border-white/5">
-                            <div class="aspect-square bg-neutral-900 rounded-lg flex items-center justify-center mb-4"><span class="material-symbols-outlined text-5xl text-primary opacity-40">deployed_code</span></div>
-                            <h3 class="font-headline font-bold text-lg truncate">${file.name}</h3>
-                            <p class="text-[10px] font-label text-neutral-500 uppercase mt-1">3D Mesh Data | Прототип об'єкту для друку або візуалізації.</p>
-                        </div>`;
-                }
-            });
-
-            // Картини
-            const filesArt = await fetchGithubFiles('painting');
-            const containerArt = document.getElementById('container-painting');
-            filesArt.forEach(file => {
-                if (file.name.endsWith('.png')) {
-                    containerArt.innerHTML += `
-                        <div class="bg-surface-container-low p-4 rounded-xl border border-white/5">
-                            <img src="${file.download_url}" class="w-full aspect-video object-cover rounded-lg mb-4 grayscale hover:grayscale-0 transition-all cursor-pointer">
-                            <h3 class="font-headline font-bold uppercase text-sm">${file.name}</h3>
-                            <p class="text-[10px] font-label text-neutral-500 mt-2">Digital Painting | Дослідження форми та кольору в неоновому стилі.</p>
-                        </div>`;
-                }
-            });
-
-            // Roblox
-            const filesRoblox = await fetchGithubFiles('roblox_studio');
-            const containerRoblox = document.getElementById('container-roblox');
-            filesRoblox.forEach(file => {
-                if (file.name.endsWith('.rbxl')) {
-                    containerRoblox.innerHTML += `
-                        <div class="flex items-center gap-6 bg-surface-container-low p-6 rounded-xl border-l-4 border-secondary">
-                            <span class="material-symbols-outlined text-4xl text-secondary">terminal</span>
-                            <div>
-                                <h3 class="text-xl font-headline font-bold">${file.name}</h3>
-                                <p class="text-[10px] font-label text-on-surface-variant uppercase">Game Logic Environment | Сценарій та рівень для Roblox Studio.</p>
-                            </div>
-                            <a href="${file.download_url}" class="ml-auto text-secondary hover:underline font-label text-[10px]">DOWNLOAD_SRC</a>
-                        </div>`;
-                }
-            });
+        function createCard(file, container, path) {
+            const card = document.createElement('div');
+            
+            // Стилізація залежно від розділу
+            if (path === 'painting') {
+                card.className = "bg-surface-container-low p-5 rounded-2xl border border-white/5 group hover:border-tertiary/40 transition-all";
+                card.innerHTML = `
+                    <div class="aspect-video bg-neutral-900 rounded-xl overflow-hidden mb-5">
+                        <img src="${file.download_url}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100">
+                    </div>
+                    <h3 class="font-headline font-bold text-lg truncate">${file.name}</h3>
+                    <p class="text-[10px] font-label text-neutral-500 mt-2 uppercase tracking-wide">Digital Art | Високоякісне зображення (PNG), розроблене для проекту.</p>
+                `;
+            } else if (path === '3D') {
+                card.className = "bg-surface-container-low p-6 rounded-2xl border border-white/5 group hover:border-primary/40 transition-all";
+                card.innerHTML = `
+                    <div class="aspect-square bg-neutral-900 rounded-xl flex flex-col items-center justify-center mb-6 border border-white/5 group-hover:bg-primary/5 transition-all">
+                        <span class="material-symbols-outlined text-6xl text-primary/30 group-hover:text-primary group-hover:rotate-12 transition-all">deployed_code</span>
+                        <span class="mt-4 text-[8px] font-mono text-neutral-700 uppercase tracking-widest">${file.name.split('.').pop()}</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-lg truncate uppercase italic">${file.name}</h3>
+                    <p class="text-[10px] font-label text-neutral-500 mt-3 leading-relaxed">3D Model | Складна геометрична структура, оптимізована для візуалізації або 3D-друку.</p>
+                    <a href="${file.download_url}" class="mt-6 inline-block w-full py-3 bg-white/5 text-center text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all">Download_Src</a>
+                `;
+            } else { // roblox_studio
+                card.className = "flex flex-col md:flex-row items-center gap-8 bg-surface-container-low p-8 rounded-2xl border border-white/5 hover:border-secondary/40 transition-all";
+                card.innerHTML = `
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-3xl text-secondary">terminal</span>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-xl font-headline font-bold italic tracking-tight uppercase">${file.name}</h3>
+                        <p class="text-[10px] font-label text-neutral-500 mt-1 uppercase tracking-widest">Roblox Level Logic | Середовище з налаштованою фізикою та скриптами.</p>
+                    </div>
+                    <a href="${file.download_url}" class="px-10 py-3 border border-secondary/30 text-secondary hover:bg-secondary hover:text-black font-label text-[10px] font-bold uppercase tracking-widest transition-all">Access_Data</a>
+                `;
+            }
+            container.appendChild(card);
         }
 
-        function switchView(id) {
+        function switchView(viewId) {
             document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
-            document.getElementById('view-' + id).classList.add('active');
+            document.getElementById('view-' + viewId).classList.add('active');
+            
+            // Стилізація активної кнопки
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('text-primary', 'bg-white/5'));
         }
 
-        loadContent();
+        // Ініціалізація
+        loadFiles('3D', 'container-3d', ['.stl', '.fbx']);
+        loadFiles('painting', 'container-painting', ['.png']);
+        loadFiles('roblox_studio', 'container-roblox', ['.rbxl']);
     </script>
 </body>
 </html>
