@@ -68,7 +68,11 @@
 
         <div class="px-6 mt-auto">
             <div class="flex items-center gap-3 p-4 glass-card rounded-xl border border-white/10">
-                <img src="image_f219ff.png.jpg" class="w-10 h-10 rounded shadow-lg shadow-primary/20 border border-primary/30" alt="Admin">
+                <img src="image_f219ff.png.jpg" 
+                     class="w-10 h-10 rounded shadow-lg shadow-primary/20 border border-primary/30 cursor-pointer" 
+                     alt="Admin"
+                     onmouseenter="playAudio()" 
+                     onmouseleave="stopAudio()">
                 <div class="overflow-hidden">
                     <p class="font-label text-[10px] truncate font-bold text-white uppercase">Marko</p>
                     <div class="flex items-center gap-1">
@@ -111,7 +115,11 @@
         <section id="view-creator" class="content-view">
             <div class="max-w-5xl bg-surface-container-low p-12 rounded-3xl border border-white/5 flex flex-col lg:flex-row gap-16 items-center">
                 <div class="relative">
-                    <img src="image_f219ff.png.jpg" class="w-64 h-64 rounded-2xl object-cover grayscale hover:grayscale-0 transition-all duration-700 border-2 border-primary/20 shadow-2xl" alt="Creator">
+                    <img src="image_f219ff.png.jpg" 
+                         class="w-64 h-64 rounded-2xl object-cover grayscale hover:grayscale-0 transition-all duration-700 border-2 border-primary/20 shadow-2xl cursor-pointer" 
+                         alt="Creator"
+                         onmouseenter="playAudio()" 
+                         onmouseleave="stopAudio()">
                     <div class="absolute -bottom-4 -right-4 bg-primary text-black px-4 py-2 font-black italic text-xs uppercase tracking-tighter">Verified_Node</div>
                 </div>
                 <div class="flex-1">
@@ -147,6 +155,18 @@
         const USERNAME = 'Vilna-info'; // Ваш логін GitHub
         const REPO = 'Marko';     // Назва репозиторію
 
+        const audio = document.getElementById('hover-audio');
+
+        function playAudio() {
+          audio.currentTime = 0; // Resets audio to start from the beginning on every hover
+          audio.play().catch(error => {
+            console.log("Autoplay prevented or interrupted:", error);
+          });
+        }
+        
+        function stopAudio() {
+          audio.pause();
+        }
         async function loadFiles(path, containerId, extensions) {
             const container = document.getElementById(containerId);
             try {
@@ -235,5 +255,6 @@
         loadFiles('painting', 'container-painting', ['.png']);
         loadFiles('roblox_studio', 'container-roblox', ['.rbxl']);
     </script>
+    <audio id="hover-audio" src="la-peace.mp3" preload="auto"></audio>
 </body>
 </html>
